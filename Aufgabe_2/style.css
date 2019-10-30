@@ -52,6 +52,11 @@ a:hover {
     color: rgb(69, 169, 182);
 }
 
+a>img:hover {
+    background-color: rgb(69, 169, 182);
+    border-radius: 5px;
+}
+
 .icon {
     position: absolute;
     top: 35px;
