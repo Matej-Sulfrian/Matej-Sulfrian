@@ -1,0 +1,32 @@
+body {
+    background-image: url("./bg.png");
+    color: antiquewhite;
+    font-size: medium;
+}
+
+.wrapper {
+    background-image: url("./wrapperbg.png");
+    margin: auto;
+    margin-top: 100px;
+    width: 600px;
+    height: 400px;
+}
+
+.busch {
+    position: relative;
+    left: -70px;
+    top: -60px;
+}
+
+.pinguin {
+    position: relative;
+    left: 470px;
+    bottom: 180px;
+}
+.text{
+    width: 400px;
+    height: 200px;
+    position: relative;
+    left: 100px;
+    top: -150px;
+}
