@@ -1,0 +1,217 @@
+@media screen and (max-width:600px) {
+
+    body {
+        margin: auto;
+        background-image: url(./bg.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 17px;
+    }
+
+    .begruessung {
+        position: absolute;
+        top: 140px;
+        margin: auto;
+        width: 100%;
+    }
+
+    .wrong {
+        position: relative;
+        width: 150px;
+        left: 50px;
+    }
+
+    .opt {
+        font-size: 0px;
+        text-align: center;
+    }
+
+    img[alt=hfulogo] {
+        width: 130px;
+        position: absolute;
+        top: 14px;
+        left: 4%;
+    }
+
+    .icons {
+        position: relative;
+        top: 30px;
+        left: 27%;
+        width: 50%;
+    }
+
+    .h {
+        position: absolute;
+        top: 15px;
+        left: 45%;
+        color: rgb(51, 51, 51);
+        text-decoration: none;
+    }
+
+    .quiz {
+        position: absolute;
+        top: 150px;
+        margin: auto;
+        width: 100%;
+    }
+
+    img[alt=frage] {
+        width: 100%;
+    }
+
+    .ftext {
+        position: relative;
+        text-align: center;
+        top: 47px;
+        color: white;
+        font-size: 10px;;
+    }
+
+    .antworten {
+        position: relative;
+        top: 10px;
+        margin: auto;
+        width: 95%;
+    }
+
+    .antwort{
+        background-image: url(./answer.png);
+        background-repeat: no-repeat;
+        padding: 1px;
+        margin: auto;
+        text-align: center;
+        font-size: 10px;
+        background-size: 100%;
+    }
+
+    .antwort:hover {
+        background-image: url(./answer_over.png);
+        background-repeat: no-repeat;
+    
+    }
+
+    .atext {
+         position: relative;
+         top: -5px;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+}
+
+@media screen and (min-width: 600px) {
+
+    body {
+        margin: auto;
+        background-image: url(./bg.png);
+        background-size: 35%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 25px;
+    }
+
+    .begruessung {
+        position: absolute;
+        top: 140px;
+        margin: auto;
+        width: 100%;
+    }
+
+    .wrong {
+        position: relative;
+        width: 100%;
+        left: 40%;
+    }
+
+    .opt {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    img[alt=hfulogo] {
+        width: 130px;
+        position: absolute;
+        top: 14px;
+        left: 4%;
+    }
+
+    img[alt="icon1"] {
+        width: 150px;
+        position: relative;
+        left: 20%
+    }
+
+    img[alt="icon2"] {
+        width: 150px;
+        position: relative;
+        left: -15%;
+    }
+
+    .icons {
+        position: relative;
+        top: 30px;
+        left: 35%;
+        width: 100%;
+    }
+
+    .h {
+        position: absolute;
+        top: 15px;
+        left: 40%;
+        color: rgb(51, 51, 51);
+        text-decoration: none;
+    }
+
+    .quiz {
+        position: absolute;
+        top: 150px;
+        margin: auto;
+        width: 100%;
+    }
+
+    img[alt=frage] {
+        width: 100%;
+    }
+
+    .ftext {
+        position: relative;
+        text-align: center;
+        top: 150px;
+        color: white;
+        
+    }
+
+    .antworten {
+        position: relative;
+        top: 10px;
+        margin: auto;
+        width: 95%;
+    }
+
+    .antwort{
+        background-image: url(./answer.png);
+        background-repeat: no-repeat;
+        padding: 20px;
+        margin: auto;
+        text-align: center;
+        background-size: 100%;
+    }
+
+    .antwort:hover {
+        background-image: url(./answer_over.png);
+        background-repeat: no-repeat;
+    
+    }
+
+    .atext {
+         position: relative;
+         top: -15px;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+}
