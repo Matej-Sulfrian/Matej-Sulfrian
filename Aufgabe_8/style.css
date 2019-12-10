@@ -1,0 +1,318 @@
+@media screen and (min-width: 600px) {
+
+html, body {
+    background-color: rgb(48, 48, 48);
+    font-family: Arial, Helvetica, sans-serif;
+    color: #D94700;
+    text-align: center;
+    padding: 0%;
+}
+
+.line {
+    height: 3px;
+    width: 100%;
+    background-color: #D94700;
+}
+
+/*menue*/
+#play {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-size: 50px;
+    padding: 5px;
+}
+
+#play:hover {
+    color: #E6E8BF;
+}
+
+#rec {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-size: 50px;
+    padding: 5px;
+}
+
+#rec:hover {
+    color: #E6E8BF;
+}
+
+#delete{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-size: 50px;
+    padding: 5px;
+}
+
+#delete:hover {
+    color: #E6E8BF;
+}
+
+.menue {
+    position: absolute;
+    left: 50%;
+    top: -50px;
+    transform:  translate(-50%, -50%);
+}
+
+#play:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+#pause:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+header {
+    font-size: 0%;
+}
+
+footer {
+    position: absolute;
+    bottom: 3%;
+    width: 99%;
+}
+
+section {
+    position: absolute;
+    left:50%;
+    top: 45%;
+    transform:  translate(-50%, -50%);
+    width: 500px;
+    text-align: center;
+}
+
+/*pad1*/
+.pad1 {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 3px solid #000000;
+    border-radius: 8%;
+    background-color: #DF2700;
+    outline: none;
+}
+
+.pad1:hover {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 7%;
+    border: 3px solid #000000;
+    background-color: #BE270D;
+    outline: none;
+}
+
+/*pad2*/
+.pad2 {
+    position: relative;
+    top: 5px;
+    width: 100px;
+    height: 100px;
+    border-radius: 7%;
+    border: 3px solid #000000;
+    background-color: #F37D02;
+    outline: none;
+}
+
+.pad2:hover {
+    position: relative;
+    top: 5px;
+    width: 100px;
+    height: 100px;
+    border-radius: 7%;
+    border: 3px solid #000000;
+    background-color: #CA6C0A;
+    outline: none;
+}
+
+/*pad3*/
+.pad3 {
+    position: relative;
+    top: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 7%;
+    border: 3px solid #000000;
+    background-color: #DDDB01;
+    outline: none;
+}
+
+.pad3:hover {
+    position: relative;
+    top: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 7%;
+    border: 3px solid #000000;
+    background-color: #BBBB07;
+    outline: none;
+}
+
+/*pad4*/
+.pad4 {
+    position: relative;
+    top: 15px;
+    width: 100px;
+    height: 100px;
+    border-radius: 7%;
+    border: 3px solid #000000;
+    background-color: #E6E8BF;
+    outline: none;
+}
+
+.pad4:hover {
+    position: relative;
+    top: 15px;
+    width: 100px;
+    height: 100px;
+    border-radius: 7%;
+    border: 3px solid #000000;
+    background-color: #C4C6A4;
+    outline: none;
+}
+}
+
+@media screen and (max-width:600px) {
+
+    html, body {
+        background-color: rgb(48, 48, 48);
+        font-family: Arial, Helvetica, sans-serif;
+        color: #D94700;
+        text-align: center;
+        padding: 0%;
+    }
+    
+    .line {
+        height: 3px;
+        width: 100%;
+        background-color: #D94700;
+    }
+    
+    .play {
+        position: relative;
+        top: 20px;
+        left: 190px;
+    }
+    
+    #play:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+    
+    #pause:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+    
+    footer {
+        position: absolute;
+        bottom: 3%;
+        width: 99%;
+        font-size: 0%;
+    }
+    
+    section {
+        position: absolute;
+        left:50%;
+        top: 50%;
+        transform:  translate(-50%, -50%);
+        width: 380px;
+        text-align: center;
+    }
+    
+    /*pad1*/
+    .pad1 {
+        position: relative;
+        width: 75px;
+        height: 75px;
+        border: 3px solid #000000;
+        border-radius: 8%;
+        background-color: #DF2700;
+        outline: none;
+    }
+    
+    .pad1:hover {
+        position: relative;
+        width: 75px;
+        height: 75px;
+        border-radius: 7%;
+        border: 3px solid #000000;
+        background-color: #BE270D;
+        outline: none;
+    }
+    
+    /*pad2*/
+    .pad2 {
+        position: relative;
+        top: 5px;
+        width: 75px;
+        height: 75px;
+        border-radius: 7%;
+        border: 3px solid #000000;
+        background-color: #F37D02;
+        outline: none;
+    }
+    
+    .pad2:hover {
+        position: relative;
+        top: 5px;
+        width: 75px;
+        height: 75px;
+        border-radius: 7%;
+        border: 3px solid #000000;
+        background-color: #CA6C0A;
+        outline: none;
+    }
+    
+    /*pad3*/
+    .pad3 {
+        position: relative;
+        top: 10px;
+        width: 75px;
+        height: 75px;
+        border-radius: 7%;
+        border: 3px solid #000000;
+        background-color: #DDDB01;
+        outline: none;
+    }
+    
+    .pad3:hover {
+        position: relative;
+        top: 10px;
+        width: 75px;
+        height: 75px;
+        border-radius: 7%;
+        border: 3px solid #000000;
+        background-color: #BBBB07;
+        outline: none;
+    }
+    
+    /*pad4*/
+    .pad4 {
+        position: relative;
+        top: 15px;
+        width: 75px;
+        height: 75px;
+        border-radius: 7%;
+        border: 3px solid #000000;
+        background-color: #E6E8BF;
+        outline: none;
+    }
+    
+    .pad4:hover {
+        position: relative;
+        top: 15px;
+        width: 75px;
+        height: 75px;
+        border-radius: 7%;
+        border: 3px solid #000000;
+        background-color: #C4C6A4;
+        outline: none;
+    }
+}
