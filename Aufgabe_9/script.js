@@ -20,3 +20,4 @@ window.addEventListener("load", function () {
     document.querySelector(".addTask").addEventListener("click", buildTask);
     document.querySelector("#delete").addEventListener("click", trash);
 });
+//# sourceMappingURL=script.js.map
