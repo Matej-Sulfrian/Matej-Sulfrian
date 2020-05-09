@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Haushaltshilfe</title>
+	<link rel="stylesheet" href="hilfsformular.css" type="text/css" media="screen" />
+	<script src="hilfsformular.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<h1>Haushaltshilfe</h1>
+	</header>
+
+	<form>
+		<div id="aufgaben">
+            <h2>Einkäufe:</h2>
+            <div id="einkäufe">
+                <input type="checkbox" name="Butter" class="Butter" value="Butter">
+                <label for="Butter">Butter</label>
+                <select name="Butter" class="Butter">
+                    <option value="1" price="20">1</option>
+                    <option value="2" price="40">2</option>
+                    <option value="3" price="60">3</option>
+                </select><br>
+
+                <input type="checkbox" name="Milch" class="Milch" value="Milch">
+                <label for="Milch">Milch</label>
+                <select name="Milch" class="Milch">
+                    <option value="1" price="69">1</option>
+                    <option value="2" price="138">2</option>
+                    <option value="3" price="207">3</option>
+                </select><br>
+
+                <input type="checkbox" name="Eier" class="Eier" value="Eier">
+                <label for="Eier">Eier</label>
+                <select name="Eier" class="Eier">
+                    <option value="1" price="31">6</option>
+                    <option value="2" price="62">8</option>
+                    <option value="3" price="93">12</option>
+                </select><br>
+
+                <input type="checkbox" name="Gemüse" class="Gemüse" value="Gemüse">
+                <label for="Gemüse">Gemüse (in g)</label>
+                <select name="Gemüse" class="Gemüse">
+                    <option value="1" price="7">200</option>
+                    <option value="2" price="14">400</option>
+                    <option value="3" price="21">600</option>
+                </select><br>
+
+                <input type="checkbox" name="Fleisch" class="Fleisch" value="Fleisch">
+                <label for="Eier">Fleisch (in g)</label>
+                <select name="Fleisch" class="Fleisch">
+                    <option value="1" price="312">200</option>
+                    <option value="2" price="624">400</option>
+                    <option value="3" price="936">600</option>
+                </select>
+            </div>          
+
+            <div id="sonstige">
+                <p>Sonstiges:</p>
+                <input type="text" name="Artikel" id="Artikel" placeholder="Artikel">
+                <select name="Amount" id="Amount">
+                    <option value="1" price="333">1</option>
+                    <option value="2" price="666">2</option>
+                    <option value="3" price="999">3</option>
+                    <option value="4" price="333">200</option>
+                    <option value="5" price="666">400</option>
+                    <option value="6" price="999">600</option>
+                </select>
+                <select name="Einheit" id="Einheit">
+                    <option value="1" price="25">Stück</option>
+                    <option value="2" price="30">g</option>
+                </select>
+                <p class="Geschäft">Geschäft wählen:</p>
+                <input type="text" name="geschäft" id="Geschäft" placeholder="Geschäft">
+            </div>
+
+            <div id="Haushalt">
+                <h2>Hausarbeiten:</h2>
+                <input type="checkbox" name="Extra" id="Putzen" value="Putzen" price="60">
+                <label for="mint">Putzen</label><br>
+                <input type="checkbox" name="Extra" id="Kochen" value="Kochen" price="80">
+                <label for="mint">Kochen</label><br>
+                <input type="checkbox" name="Extra" id="Wäsche" value="Wäsche" price="70">
+                <label for="mint">Wäsche</label><br>
+                <input type="checkbox" name="Extra" id="Gartenarbeiten" value="Gartenarbeiten" price="120">
+                <label for="mint">Gartenarbeiten</label>
+            </div>
+
+            <div id="slider">
+                <h2>Uhrzeit:</h2><br>
+                <span>
+                    07h
+                    <input type="range" name="Uhrzeit" id="Uhrzeit" min="7" max="18" step="1" value="7">
+                    18h
+                </span>
+            </div>
+        </div>
+        <div id="Zahlungsmethode">
+            <h2>Zahlungsmethode</h2>
+            <input type="radio" name="Zahlung" id="slim" item="Bar" checked>
+            <label for="slim">Bar</label>
+            <input type="radio" name="Zahlung" id="wide" item="Bankeinzug">
+            <label for="wide">Bankeinzug</label>
+            <input type="radio" name="Zahlung" id="paper" item="Überweisung">
+            <label for="paper">Überweisung</label>
+        </div>
+	</form>
+	
+	<div>
+		<h2>Your order</h2>
+		<div id="order">
+			...
+		</div>
+	</div>
+
+</body>
+
+</html>

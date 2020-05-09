@@ -1,0 +1,68 @@
+body {
+	display: grid;
+	grid-template-columns: 70% auto;
+	grid-template-rows: auto auto
+}
+
+header {
+	grid-column: span 2;
+	text-align: center;
+}
+
+#aufgaben {
+    display: grid;
+    position: absolute;
+    top: 100px;
+    left: 30px;
+    width: 240px;
+}
+
+#Zahlungsmethode {
+    display: grid;
+    position: absolute;
+    top: 100px;
+    left: 500px;
+    width: 350px;
+}
+
+#Amount {
+    position: relative;
+    float: unset;
+    top: -10px;
+}
+
+#Einheit {
+    position: relative;
+    top: -9px;
+}
+
+#Artikel {
+    width: 100px;
+    position: relative;
+    top: -10px;
+}
+
+#Geschäft {
+    width: 100px;
+    position: relative;
+    top: -20px;
+}
+
+.Geschäft {
+    position: relative;
+    top: -10px;
+}
+
+#Haushalt {
+    position: relative;
+    top: -20px;
+}
+
+select {
+    float: right;
+}
+
+#slider {
+	display: grid;
+    grid-template-columns: auto auto;
+}
