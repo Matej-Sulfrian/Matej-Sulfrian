@@ -1,12 +1,12 @@
 body {
-	display: grid;
-	grid-template-columns: 70% auto;
-	grid-template-rows: auto auto
+    display: grid;
+    grid-template-columns: 70% auto;
+    grid-template-rows: auto auto
 }
 
 header {
-	grid-column: span 2;
-	text-align: center;
+    grid-column: span 2;
+    text-align: center;
 }
 
 #aufgaben {
@@ -63,6 +63,6 @@ select {
 }
 
 #slider {
-	display: grid;
+    display: grid;
     grid-template-columns: auto auto;
 }
