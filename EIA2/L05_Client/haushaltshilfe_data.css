@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    font-weight: smaller;
+    background-image: url(bg.png);
+}
+
+input {
+    border-radius: 10px;
+    opacity: 0.8;
+    padding: 2px;
+}
+
+h1 {
+    text-align: center;
+    background-color: rgb(17, 104, 155) ;
+    color: white;
+}
+
+#choice {
+    position: relative;
+    top: 75px;
+    border-radius: 10px;
+    width: 210px;
+    padding: 8px;
+    margin: 10px 0px 10px 0px;
+    border: 2px solid rgb(17, 104, 155);
+    background-color: rgb(221, 243, 255);
+}
+
+h3 {
+    width: 200px;
+}
+
+#kategorie {
+    position: relative;
+    left: 75px;
+    top: -50px;
+}
+
+#auswahl {
+    position: relative;
+    left: 400px;
+    top: -90px;
+}
+
+#übersicht {
+    position: relative;
+    left: 675px;
+    top: -130px;
+}
+
+#order {
+    position: absolute;
+    left: 680px;
+    top: 150px;
+    border-radius: 10px;
+    padding: 2px;
+    margin: 5px 0px 5px 0px; 
+    width: 557px;
+    border: 2px solid rgb(17, 104, 155);
+    background-color: rgb(221, 243, 255);
+}
+
+#grocery {
+    position: relative;
+    top: -153px;
+    left: 230px;
+    border-radius: 10px;
+    width: 390px;
+    border: 2px solid rgb(17, 104, 155);
+    background-color: rgb(221, 243, 255);
+    margin: 10px;
+}
+
+#household > *{
+    margin: 7px;
+}
+
+#money {
+    position: relative;
+    top: -160px;
+    left: 230px;
+    border-radius: 10px;
+    width: 390px;
+    margin: 10px;
+    border: 2px solid rgb(17, 104, 155);
+    background-color: rgb(221, 243, 255);
+    
+}
+
+#household {
+    position: relative;
+    top: -170px;
+    left: 230px;
+    border-radius: 10px;
+    width: 390px;
+    margin: 10px;
+    border: 2px solid rgb(17, 104, 155);
+    background-color: rgb(221, 243, 255);
+}
+
+button {
+    margin: 5px;
+    border: 1px solid grey;
+    background-color: rgba(17, 104, 155, 0.384);
+    border-radius: 5px;
+}
+
+table, th, td {
+    width: 550px;
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    margin: 3px; 
+}
+
+legend {
+    border-radius: 8px;
+    border: 2px solid grey;
+    background-color: white;
+}
+
+.Erledigung {
+    width: 300px;;
+}
+
+#grocery:disabled, #household:disabled, #money:disabled {
+    color: grey;
+    border: 2px solid grey;
+    background-color: transparent;
+}
+
+.far {
+    font-size: medium;
+    background-color: transparent;
+    border-color: transparent;
+}
