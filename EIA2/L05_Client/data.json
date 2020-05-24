@@ -26,4 +26,4 @@
             { "name": "Rasen mähen", "unit": "rasen", "price": 20},
             { "name": "Gassi gehen", "unit": "gassi", "price": 10}
         ]
-}
+} 
