@@ -205,7 +205,7 @@ namespace L05_Clien {
                         break;
                     }
                     break;
-                case "toDo":
+                case "ToDo":
                     // Suchen nach dem Preis-Attribut 
                     let itemCost: number = Number(item.getAttribute("price"));
                     // Nach dem selben Prinzip wie oben werden jetzt auch die Haushaltsarbeiten durchgearbeitet
