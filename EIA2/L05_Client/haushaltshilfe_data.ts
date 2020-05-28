@@ -50,7 +50,7 @@ namespace L05_Clien {
         householdDone = <HTMLButtonElement>document.getElementById("householdDone");
         submit = <HTMLButtonElement>document.getElementById("submit");
         totalPrice = <HTMLLabelElement>document.getElementById("totalPrice");
-        response = await fetch("Data.json");
+        response = await fetch("data.json");
         offer = await response.text();
         offer = JSON.parse(offer);
 

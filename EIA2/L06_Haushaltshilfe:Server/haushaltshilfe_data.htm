@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haushaltshilfe</title>
+    <script src="haushaltshilfe_data.js"> </script>
+    <script src="GenerateContent.js"></script>
+    <link rel="stylesheet" href="haushaltshilfe_data.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+</head>
+
+<body>
+    <h1>Haushaltshilfe</h1>
+    <div id="choice">
+        <input type="radio" name="task" id="shopping" checked><label>Einkaufen</label><br>
+        <input type="radio" name="task" id="cash"><label>Geld abheben/ einzahlen</label><br>
+        <input type="radio" name="task" id="house"><label>Haushaltsservice</label><br>
+    </div>
+    <h3 id="kategorie">Katekorie</h3>
+    <h3 id="auswahl">Auswahl</h3>
+    <h3 id="übersicht">Bestellübersicht</h3>
+    <div id="order">
+        <table id="table">
+            <tr>
+                <th>Artikel</th>
+                <th>Preis</th>
+                <th>Menge</th>
+                <th>Einheit</th>
+                <th>Gebühr</th>
+                <th>Zusätzliche Informationen</th>
+                <th>Löschen</th>
+            </tr>
+        </table><br>
+        <table id="table2"class="Erledigung">
+            <tr>
+                <th>Erledigung</th>
+                <th>Preis</th>
+                <th>Löschen</th>
+            </tr>
+        </table><br>
+        <table id="table3" class="Erledigung">
+            <tr>
+                <th>Erledigung</th>
+                <th>Preis</th>
+                <th>Löschen</th>
+            </tr>
+        </table><br>
+        <label for="date">Lieferdatum</label> <input id="date" type="date" min="2020-05-07">
+        <label id="totalPrice"></label><br>
+        <label>Zahlungsart:</label>
+        <label for="paypal">Paypal:</label> <input type="radio" name="payment" id="paypal" value="Paypal"/>
+        <label for="überweisung">Überweisung:</label> <input type="radio" name="payment" id="überweisung" value="Überweisung"/>
+        <label for="bar">Bar:</label><input type="radio" name="payment" id="bar" value="Bar"/>
+        <button type="reset" form="form" id="reset">Reset</button>
+        <button type="button" form="form" id="submit">Order</button>
+    </div>
+    <div>
+        <form id="form">
+            <fieldset id="grocery">
+                <legend>Einkaufen</legend>
+                <input id="Einkäufe" name="Artikel" list="article"  placeholder="Artikel auswählen"/>
+
+                <span id="slider">
+                    <span>
+                        Menge:
+                        1
+                        <input  type="range" min="1.0" max="5.0" name="Menge"  id="Quantity" step="1.0" value="1.0">
+                        5
+                    </span>
+                </span>
+                <input id="Geschäfte" name="Bevorzugter Supermarkt" list="market" placeholder="Supermarkt wählen" value=""/>
+
+                <button id="cart" type="button" id="hello">Zur Bestellung hinzufügen</button>
+            </fieldset>
+            <fieldset id="money" disabled>
+                <legend>Geld abheben/ einzahlen</legend>
+                <input type="checkbox" value="Geld einzahlen" name="cash" id="einzahlen"/><label for="einzahlen">Geld einzahlen</label><br>
+                <input type="checkbox" value="Geld abheben" name="cash"id="abheben"/><label for="abheben">Geld abheben</label><br>
+                <span id="sliderr">
+                    <span>
+                        20
+                        <input price="0" type="range" name="bargeld" min="20" max="150" id="Bank" step="5" value="20">
+                        150
+                    </span>
+                </span>
+                <button id="getCash" type="button">Zur Bestellung hinzufügen</button>
+            </fieldset>
+
+            <fieldset id="household" disabled>
+                <legend>Haushaltsarbeiten</legend>
+
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+</html> 

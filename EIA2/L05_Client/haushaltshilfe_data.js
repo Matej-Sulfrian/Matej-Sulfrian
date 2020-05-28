@@ -46,7 +46,7 @@ var L05_Clien;
         householdDone = document.getElementById("householdDone");
         submit = document.getElementById("submit");
         totalPrice = document.getElementById("totalPrice");
-        response = await fetch("Data.json");
+        response = await fetch("data.json");
         offer = await response.text();
         offer = JSON.parse(offer);
         // Event-Listener auf alle Buttons, nachdem alles geladen wurde
