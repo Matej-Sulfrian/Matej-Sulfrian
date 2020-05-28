@@ -155,7 +155,7 @@ namespace L05_Clien {
                     // Hinzufügen des Preises zum Gesamtpreis
                     totalCost += itemPrice + 0.50;
                     // Das Form-Element wird geleert, damit der Nutzer die Eingaben nicht selbst löschen muss 
-                    form.reset();
+                    
                     break;
                 case "cash":
                     // Suchen nach dem Preis-Attribut 

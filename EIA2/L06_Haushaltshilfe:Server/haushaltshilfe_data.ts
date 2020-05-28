@@ -182,7 +182,7 @@ namespace L06_Server {
                         table2.appendChild(row);
                         // Die Kosten zu den Gesamtkosten hinzufügen und dann das Form-Element leeren
                         totalCost += geld;
-                        form.reset();
+                        
                         break;
                     }
                     else if (money == "Geld einzahlen") {
