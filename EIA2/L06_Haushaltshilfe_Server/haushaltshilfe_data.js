@@ -27,7 +27,7 @@ var L06_Server;
     let response;
     let offer;
     let data;
-    let url = "http://localhost:5001";
+    let url = "https://dnbrules.herokuapp.com/";
     async function handleLoad() {
         response = await fetch("data.json");
         offer = await response.text();

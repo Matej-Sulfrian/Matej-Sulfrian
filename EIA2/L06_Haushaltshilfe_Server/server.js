@@ -18,10 +18,8 @@ var L06_Server;
         if (_request.url) {
             let url = Url.parse(_request.url, true);
             for (let key in url.query) {
-                _response.write(key + ":" + url.query[key] + "<br>");
+                _response.write(key + ": " + url.query[key] + " ");
             }
-            let jsonString = JSON.stringify(url.query);
-            _response.write(jsonString);
         }
         _response.write("This is my response");
         _response.end();
