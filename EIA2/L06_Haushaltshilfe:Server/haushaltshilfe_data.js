@@ -27,6 +27,7 @@ var L06_Server;
     let response;
     let offer;
     let data;
+    let url = "http://localhost:5001";
     async function handleLoad() {
         response = await fetch("data.json");
         offer = await response.text();
@@ -249,12 +250,14 @@ var L06_Server;
             zahlungsart = "Bar";
         }
         alert("Ihre Bestellung wird am " + lieferdatum + "  bei Ihnen sein!" + "\n Ihre Zahlungsart: " + zahlungsart + "\n Ihre gesamte Bestellung kostet " + totalCost + "€");
-        //Dataen an Server schicken
+        //Daten an Server schicken
         console.log("Send Order");
         let formData = new FormData(form);
         let query = new URLSearchParams(formData);
-        await fetch("haushaltshilfe_data.htm?" + query.toString());
+        let response = await fetch(url + "?" + query.toString());
+        let responseText = await response.text();
         alert("Ihre Bestellung wurde entgegen genommen. Vielen Dank!");
+        alert(responseText);
     }
 })(L06_Server || (L06_Server = {}));
 //# sourceMappingURL=haushaltshilfe_data.js.map

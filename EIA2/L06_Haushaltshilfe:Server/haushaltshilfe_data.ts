@@ -27,6 +27,7 @@ namespace L06_Server {
     let response: Response;
     let offer: string;
     let data: Data;
+    let url: string = "http://localhost:5001";
 
     async function handleLoad(): Promise<void> {
 
@@ -264,12 +265,14 @@ namespace L06_Server {
         }
         alert("Ihre Bestellung wird am " + lieferdatum + "  bei Ihnen sein!" + "\n Ihre Zahlungsart: " + zahlungsart + "\n Ihre gesamte Bestellung kostet " + totalCost + "€");
 
-        //Dataen an Server schicken
+        //Daten an Server schicken
         console.log("Send Order");
         let formData: FormData  = new FormData(form);
         let query: URLSearchParams = new URLSearchParams(<any>formData);
-        await fetch("haushaltshilfe_data.htm?" + query.toString());
+        let response: Response = await fetch(url + "?" + query.toString());
+        let responseText: string = await response.text();
         alert("Ihre Bestellung wurde entgegen genommen. Vielen Dank!");
+        alert(responseText);
 
     }
 
