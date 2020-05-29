@@ -263,7 +263,6 @@ namespace L06_Server {
         else {
             zahlungsart = "Bar";
         }
-        alert("Ihre Bestellung wird am " + lieferdatum + "  bei Ihnen sein!" + "\n Ihre Zahlungsart: " + zahlungsart + "\n Ihre gesamte Bestellung kostet " + totalCost + "€");
 
         //Daten an Server schicken
         console.log("Send Order");
@@ -271,8 +270,9 @@ namespace L06_Server {
         let query: URLSearchParams = new URLSearchParams(<any>formData);
         let response: Response = await fetch(url + "?" + query.toString());
         let responseText: string = await response.text();
-        alert("Ihre Bestellung wurde entgegen genommen. Vielen Dank!");
         alert(responseText);
+
+        alert("Ihre Bestellung wird am " + lieferdatum + "  bei Ihnen sein!" + "\nIhre Zahlungsart: " + zahlungsart + "\nIhre gesamte Bestellung kostet " + totalCost + "€ \nVielen Dank für Ihre Bestellung!");
 
     }
 

@@ -249,15 +249,14 @@ var L06_Server;
         else {
             zahlungsart = "Bar";
         }
-        alert("Ihre Bestellung wird am " + lieferdatum + "  bei Ihnen sein!" + "\n Ihre Zahlungsart: " + zahlungsart + "\n Ihre gesamte Bestellung kostet " + totalCost + "€");
         //Daten an Server schicken
         console.log("Send Order");
         let formData = new FormData(form);
         let query = new URLSearchParams(formData);
         let response = await fetch(url + "?" + query.toString());
         let responseText = await response.text();
-        alert("Ihre Bestellung wurde entgegen genommen. Vielen Dank!");
         alert(responseText);
+        alert("Ihre Bestellung wird am " + lieferdatum + "  bei Ihnen sein!" + "\nIhre Zahlungsart: " + zahlungsart + "\nIhre gesamte Bestellung kostet " + totalCost + "€ \nVielen Dank für Ihre Bestellung!");
     }
 })(L06_Server || (L06_Server = {}));
 //# sourceMappingURL=haushaltshilfe_data.js.map

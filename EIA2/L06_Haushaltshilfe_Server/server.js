@@ -21,7 +21,6 @@ var L06_Server;
                 _response.write(key + ": " + url.query[key] + " ");
             }
         }
-        _response.write("This is my response");
         _response.end();
     }
 })(L06_Server = exports.L06_Server || (exports.L06_Server = {}));

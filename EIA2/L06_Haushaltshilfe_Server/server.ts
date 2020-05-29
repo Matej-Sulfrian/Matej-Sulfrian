@@ -25,7 +25,6 @@ export namespace L06_Server {
             }
         }
 
-        _response.write("This is my response");
         _response.end();
     }
 }
