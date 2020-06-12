@@ -1,0 +1,253 @@
+body {
+    background: rgb(70,252,117);
+    background: radial-gradient(circle, rgb(4, 116, 32) 0%, rgb(2, 87, 2) 100%); 
+}
+
+.spieler, .gegner {
+    width: 80%;
+    height: 156px;
+    border: black, 10px;
+    border-style: solid;
+    border-radius: 8px;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.feld {
+    position: absolute;
+    top: 37%;
+    left: 47%;
+    width: 250px;
+    height: 156px;
+    border: black, 10px;
+    border-style: solid;
+    border-radius: 8px;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.feld2 {
+    position: absolute;
+    top: 37%;
+    left: 47%;
+    width: 250px;
+    height: 156px;
+    border-radius: 8px;
+}
+
+.gegner {
+    position: absolute;
+    top: 2%;
+    left: 1%;
+}
+
+.spieler {
+    position: absolute;
+    bottom: 2%;
+    right: 1%;
+}
+.spieler .karte {
+    float: right;
+}
+
+.karte {
+    float: left;
+    margin: 5px;
+    width: 90px;
+    height: 140px;
+    border: black, 10px;
+    background-color: seashell;
+    border-style: solid;
+    border-radius: 5px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.karte:hover {
+    background-color: rgb(202, 202, 202);
+}
+
+.karteverdeckt {
+    float: left;
+    margin: 5px;
+    width: 90px;
+    height: 140px;
+    border: black, 10px;
+    border-style: solid;
+    border-radius: 5px;
+    background-image: url(karte.jpg);
+    background-size: 104%;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.feld1 {
+    float: left;
+}
+
+.stapel {
+    position: absolute;
+    right: 2px;
+    margin: 5px;
+    width: 90px;
+    background-image: url(karte.jpg);
+    background-size: 100%;
+    height: 140px;
+    border: black, 10px;
+    border-style: solid;
+    border-radius: 5px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.ziehen {
+    position: absolute;
+    right: 2px;
+    margin: 5px;
+    width: 90px;
+    height: 140px;
+}
+
+.zahloben {
+    position: relative;
+    top: -24px;
+    left: 5px;
+    font-size: 25px;
+}
+
+.zahlunten {
+    position: relative;
+    top: -143px;
+    left: 72px;
+    width: 20px;
+    font-size: 25px;
+}
+
+.fab {
+    position: relative;
+    top: -83px;
+    left: 20px;
+    font-size: 50px ;
+}
+
+.fa-chrome {
+    color: rgb(250, 50, 50);
+}
+
+.fa-firefox {
+    color: rgb(243, 147, 22);
+}
+
+.fa-safari {
+    color: lightskyblue;
+}
+
+.fa-internet-explorer {
+    color: blue;
+}
+
+.winlose {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+}
+
+.homer {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    width: 250px;
+    height: 200px;
+    background-size: 100%;
+}
+
+.homer2 {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    width: 200px;
+    height: 200px;
+    background-size: 100%;
+}
+
+.schrift {
+    position: absolute;
+    top: 38%;
+    left: 47%;
+    width: 250px;
+    height: 140px;
+    background-size: 100%;
+}
+
+.homer1 {
+    position: absolute;
+    top: 30%;
+    right: 10%;
+    width: 250px;
+    height: 200px;
+    background-size: 100%;
+}
+
+.homer3 {
+    position: absolute;
+    top: 30%;
+    right: 10%;
+    width: 200px;
+    height: 200px;
+    background-size: 100%;
+}
+
+.newgame {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 70px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.newgame:hover {
+    color: red;
+}
+
+.hinweis {
+    position: absolute;
+    top: 45%;
+    right: 28%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(148, 10, 10);
+}
+
+.aschenbecher {
+    position: absolute;
+    top: 60%;
+    left: 8%;
+    width: 250px;
+    height: 160px;
+    background-size: 100%;
+    background-image: url(aschenbecher.png);
+}
+
+.smoke {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    width: 150px;
+    height: 150px;
+    background-size: 100%;
+    background-image: url(smoke.gif);
+}
+
+.glas {
+    position: absolute;
+    top: 40%;
+    left: -3%;
+    width: 530px;
+    height: 200px;
+    background-size: 100%;
+    background-image: url(glas.png);
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+}
