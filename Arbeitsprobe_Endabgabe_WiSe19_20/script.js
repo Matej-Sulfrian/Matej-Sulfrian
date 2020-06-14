@@ -1,3 +1,4 @@
+"use strict";
 /*Stapel aus dem gegeben wird*/
 var deck = [
     /*Chrome*/
@@ -195,7 +196,7 @@ function mischen() {
 }
 /*Karten geben*/
 function geben() {
-    var k = 5;
+    let k = 5;
     while (k !== 0) {
         spieler.push(deck[0]);
         deck.splice(0, 1);
@@ -207,7 +208,7 @@ function geben() {
     feld.push(deck[0]);
     deck.splice(0, 1);
     mittelFeld.innerHTML = "";
-    var neueKarte = document.createElement("div");
+    let neueKarte = document.createElement("div");
     neueKarte.classList.add("karte");
     neueKarte.classList.add("kartefeld");
     mittelFeld.appendChild(neueKarte);
@@ -229,7 +230,7 @@ function spielerZug(index) {
             spieler.splice(index, 1);
             /*Karte wird ins Feld gezeichnet*/
             mittelFeld.innerHTML = "";
-            var neueKarte = document.createElement("div");
+            let neueKarte = document.createElement("div");
             neueKarte.classList.add("karte");
             neueKarte.classList.add("kartefeld");
             mittelFeld.appendChild(neueKarte);
@@ -285,7 +286,7 @@ function gegnerZug() {
                 gegner.splice(f, 1);
                 /*Karte wird ins Feld gezeichnet*/
                 mittelFeld.innerHTML = "";
-                var neueKarte = document.createElement("div");
+                let neueKarte = document.createElement("div");
                 neueKarte.classList.add("karte");
                 neueKarte.classList.add("kartefeld");
                 mittelFeld.appendChild(neueKarte);
@@ -326,23 +327,20 @@ function gegnerZug() {
 /*Karten in das Spielerfeld zeichnen*/
 function drawCardsToSpieler() {
     spielerFeld.innerHTML = "";
-    var _loop_1 = function (index_1) {
-        var neueKarte = document.createElement("div");
+    for (let index = 0; index < spieler.length; index++) {
+        let neueKarte = document.createElement("div");
         neueKarte.classList.add("karte");
-        neueKarte.classList.add("karte" + index_1);
+        neueKarte.classList.add("karte" + index);
         spielerFeld.appendChild(neueKarte);
-        spielerFeld.querySelector(".karte" + index_1).innerHTML = "<p class='zahloben'>" + spieler[index_1].zahl + "</p><p class='" + spieler[index_1].farbe + "'></p><p class='zahlunten'>" + spieler[index_1].zahl + "</p>";
-        document.querySelector(".karte" + index_1).addEventListener("click", function () { spielerZug(index_1); });
-    };
-    for (var index_1 = 0; index_1 < spieler.length; index_1++) {
-        _loop_1(index_1);
+        spielerFeld.querySelector(".karte" + index).innerHTML = "<p class='zahloben'>" + spieler[index].zahl + "</p><p class='" + spieler[index].farbe + "'></p><p class='zahlunten'>" + spieler[index].zahl + "</p>";
+        document.querySelector(".karte" + index).addEventListener("click", function () { spielerZug(index); });
     }
 }
 /*Karten in das Gegnerfeld zeichnen*/
 function drawCardsToGegner() {
     gegnerFeld.innerHTML = "";
-    for (var index_2 = 0; index_2 < gegner.length; index_2++) {
-        var neueKarte = document.createElement("div");
+    for (let index = 0; index < gegner.length; index++) {
+        let neueKarte = document.createElement("div");
         neueKarte.classList.add("karteverdeckt");
         gegnerFeld.appendChild(neueKarte);
     }
