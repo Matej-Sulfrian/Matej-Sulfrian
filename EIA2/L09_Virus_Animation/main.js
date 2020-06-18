@@ -3,6 +3,7 @@ var L09_Virus_Animation;
 (function (L09_Virus_Animation) {
     window.addEventListener("load", handleLoad);
     let viruss = [];
+    let antibodys = [];
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -10,9 +11,8 @@ var L09_Virus_Animation;
         L09_Virus_Animation.crc2 = canvas.getContext("2d");
         drawBackground();
         createVirus(20);
+        createAntibodys(80);
         window.setInterval(update, 20);
-        /*let virus: Virus = new Virus(1);
-        virus.draw();*/
     }
     function createVirus(_nVirus) {
         console.log("Create Virus");
@@ -21,11 +21,22 @@ var L09_Virus_Animation;
             viruss.push(virus);
         }
     }
+    function createAntibodys(_nAntibody) {
+        console.log("Create Virus");
+        for (let i = 0; i < _nAntibody; i++) {
+            let antibody = new L09_Virus_Animation.Antibody(1);
+            antibodys.push(antibody);
+        }
+    }
     function update() {
         drawBackground();
         for (let virus of viruss) {
             virus.move(1 / 50);
             virus.draw();
+        }
+        for (let antibody of antibodys) {
+            antibody.move(1 / 50);
+            antibody.draw();
         }
         drawVisusLogo();
     }

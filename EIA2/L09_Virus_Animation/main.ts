@@ -3,6 +3,7 @@ namespace L09_Virus_Animation {
     window.addEventListener("load", handleLoad);
     export let crc2: CanvasRenderingContext2D;
     let viruss: Virus [] = [];
+    let antibodys: Antibody [] = [];
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -12,10 +13,9 @@ namespace L09_Virus_Animation {
 
         drawBackground();
         createVirus(20);
+        createAntibodys(80);
         window.setInterval(update, 20);
 
-        /*let virus: Virus = new Virus(1);
-        virus.draw();*/
     }
 
     function createVirus (_nVirus: number): void {
@@ -26,12 +26,28 @@ namespace L09_Virus_Animation {
         }
     }
 
+    function createAntibodys (_nAntibody: number): void {
+        console.log("Create Virus");
+        for (let i: number = 0; i < _nAntibody; i++) {
+            let antibody: Antibody = new Antibody(1);
+            antibodys.push(antibody);
+        }
+    }
+
     function update(): void {
+        
         drawBackground();
+
         for (let virus of viruss) {
             virus.move(1 / 50);
             virus.draw();
         }
+
+        for (let antibody of antibodys) {
+            antibody.move(1 / 50);
+            antibody.draw();
+        }
+        
         drawVisusLogo();
     }
 
@@ -127,6 +143,5 @@ namespace L09_Virus_Animation {
         crc2.lineCap = "round";
         crc2.stroke();
         crc2.closePath();
-        
     }
 }
