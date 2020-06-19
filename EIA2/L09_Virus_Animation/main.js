@@ -4,6 +4,10 @@ var L09_Virus_Animation;
     window.addEventListener("load", handleLoad);
     let viruss = [];
     let antibodys = [];
+    let a = "red";
+    let b = "white";
+    //let d: string = "30px";
+    //let e: string = "35px";
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -13,6 +17,7 @@ var L09_Virus_Animation;
         createVirus(20);
         createAntibodys(80);
         window.setInterval(update, 20);
+        window.setInterval(toggleColor, 1000);
     }
     function createVirus(_nVirus) {
         console.log("Create Virus");
@@ -80,32 +85,55 @@ var L09_Virus_Animation;
         L09_Virus_Animation.crc2.resetTransform();
         L09_Virus_Animation.crc2.translate(150, 275);
         L09_Virus_Animation.crc2.beginPath();
-        L09_Virus_Animation.crc2.arc(0, 0, 45, 0, 2 * Math.PI);
-        L09_Virus_Animation.crc2.strokeStyle = "black";
-        L09_Virus_Animation.crc2.lineWidth = 13;
+        L09_Virus_Animation.crc2.arc(0, 0, 55, 0, 2 * Math.PI);
+        L09_Virus_Animation.crc2.strokeStyle = a;
+        L09_Virus_Animation.crc2.lineWidth = 18;
         L09_Virus_Animation.crc2.stroke();
         L09_Virus_Animation.crc2.closePath();
         L09_Virus_Animation.crc2.beginPath();
-        L09_Virus_Animation.crc2.arc(50, 40, 50, 1.5, 2 * Math.PI);
-        L09_Virus_Animation.crc2.strokeStyle = "black";
-        L09_Virus_Animation.crc2.lineWidth = 15;
+        L09_Virus_Animation.crc2.arc(50, 40, 60, 1.5, 2 * Math.PI);
+        L09_Virus_Animation.crc2.strokeStyle = a;
+        L09_Virus_Animation.crc2.lineWidth = 20;
         L09_Virus_Animation.crc2.lineCap = "round";
         L09_Virus_Animation.crc2.stroke();
         L09_Virus_Animation.crc2.closePath();
         L09_Virus_Animation.crc2.beginPath();
-        L09_Virus_Animation.crc2.arc(-50, 40, 50, 3.2, 2.5 * Math.PI);
-        L09_Virus_Animation.crc2.strokeStyle = "black";
-        L09_Virus_Animation.crc2.lineWidth = 15;
+        L09_Virus_Animation.crc2.arc(-50, 40, 60, 3.2, 2.5 * Math.PI);
+        L09_Virus_Animation.crc2.strokeStyle = a;
+        L09_Virus_Animation.crc2.lineWidth = 20;
         L09_Virus_Animation.crc2.lineCap = "round";
         L09_Virus_Animation.crc2.stroke();
         L09_Virus_Animation.crc2.closePath();
         L09_Virus_Animation.crc2.beginPath();
-        L09_Virus_Animation.crc2.arc(0, -50, 50, -0.75, 1.23 * Math.PI);
-        L09_Virus_Animation.crc2.strokeStyle = "black";
-        L09_Virus_Animation.crc2.lineWidth = 15;
+        L09_Virus_Animation.crc2.arc(0, -50, 60, -0.75, 1.23 * Math.PI);
+        L09_Virus_Animation.crc2.strokeStyle = a;
+        L09_Virus_Animation.crc2.lineWidth = 20;
         L09_Virus_Animation.crc2.lineCap = "round";
         L09_Virus_Animation.crc2.stroke();
         L09_Virus_Animation.crc2.closePath();
+    }
+    function toggleColor() {
+        let c = "";
+        //let f: string = "0";
+        c = b;
+        b = a;
+        a = c;
+        c = "";
+        /*f = e;
+        e = d;
+        d = f;
+        f = "0";*/
+        setColor();
+        playAlarm();
+    }
+    function setColor() {
+        let font = document.getElementById("virus");
+        font.setAttribute("style", "background-color:" + b + "; color:" + a + ";");
+    }
+    function playAlarm() {
+        let alarm = new Audio("alarm.mp3");
+        alarm.play();
+        console.log(alarm);
     }
 })(L09_Virus_Animation || (L09_Virus_Animation = {}));
 //# sourceMappingURL=main.js.map

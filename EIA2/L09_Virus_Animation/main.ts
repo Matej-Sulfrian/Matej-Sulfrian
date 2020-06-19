@@ -4,6 +4,10 @@ namespace L09_Virus_Animation {
     export let crc2: CanvasRenderingContext2D;
     let viruss: Virus [] = [];
     let antibodys: Antibody [] = [];
+    let a: string = "red";
+    let b: string = "white";
+    //let d: string = "30px";
+    //let e: string = "35px";
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -15,6 +19,7 @@ namespace L09_Virus_Animation {
         createVirus(20);
         createAntibodys(80);
         window.setInterval(update, 20);
+        window.setInterval(toggleColor, 1000);
 
     }
 
@@ -114,34 +119,62 @@ namespace L09_Virus_Animation {
         crc2.translate(150, 275);
 
         crc2.beginPath();
-        crc2.arc(0, 0, 45, 0, 2 * Math.PI);
-        crc2.strokeStyle = "black";
-        crc2.lineWidth = 13;
+        crc2.arc(0, 0, 55, 0, 2 * Math.PI);
+        crc2.strokeStyle = a;
+        crc2.lineWidth = 18;
         crc2.stroke();
         crc2.closePath();
 
         crc2.beginPath();
-        crc2.arc(50, 40, 50, 1.5, 2 * Math.PI);
-        crc2.strokeStyle = "black";
-        crc2.lineWidth = 15;
+        crc2.arc(50, 40, 60, 1.5, 2 * Math.PI);
+        crc2.strokeStyle = a;
+        crc2.lineWidth = 20;
         crc2.lineCap = "round";
         crc2.stroke();
         crc2.closePath();
 
         crc2.beginPath();
-        crc2.arc(-50, 40, 50, 3.2, 2.5 * Math.PI);
-        crc2.strokeStyle = "black";
-        crc2.lineWidth = 15;
+        crc2.arc(-50, 40, 60, 3.2, 2.5 * Math.PI);
+        crc2.strokeStyle = a;
+        crc2.lineWidth = 20;
         crc2.lineCap = "round";
         crc2.stroke();
         crc2.closePath();
 
         crc2.beginPath();
-        crc2.arc(0, -50, 50, -0.75, 1.23 * Math.PI);
-        crc2.strokeStyle = "black";
-        crc2.lineWidth = 15;
+        crc2.arc(0, -50, 60, -0.75, 1.23 * Math.PI);
+        crc2.strokeStyle = a;
+        crc2.lineWidth = 20;
         crc2.lineCap = "round";
         crc2.stroke();
         crc2.closePath();
+    }
+
+    function toggleColor(): void {
+        let c: string = "";
+        //let f: string = "0";
+    
+        c = b;
+        b = a;
+        a = c;
+        c = "";
+        /*f = e;
+        e = d;
+        d = f;
+        f = "0";*/
+    
+        setColor();
+        playAlarm();
+    }
+    
+    function setColor(): void {
+        let font: HTMLElement = <HTMLElement> document.getElementById("virus");
+        font.setAttribute("style", "background-color:" + b + "; color:" + a + ";");
+    }
+
+    function playAlarm(): void {
+        let alarm: HTMLAudioElement = new Audio("alarm.mp3");
+        alarm.play();
+        console.log(alarm);
     }
 }
