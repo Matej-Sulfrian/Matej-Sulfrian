@@ -17,7 +17,7 @@ export namespace L07_Datenbank {
 
     //let destination: string = "";
 
-    startServer(port, /*destination*/);
+    startServer(port /*destination*/);
     connectToDatabase(databaseUrl);
 
     function startServer(_port: number | string /*, _destination: string*/ ): void {

@@ -28,7 +28,8 @@ var L10_Virus_Inheritance;
     function createAntibodys(_nAntibody) {
         console.log("Create Virus");
         for (let i = 0; i < _nAntibody; i++) {
-            let antibody = new L10_Virus_Inheritance.Antibody(1);
+            let position = new L10_Virus_Inheritance.Vector(50, 100);
+            let antibody = new L10_Virus_Inheritance.Antibody(1, position);
             moveables.push(antibody);
         }
     }

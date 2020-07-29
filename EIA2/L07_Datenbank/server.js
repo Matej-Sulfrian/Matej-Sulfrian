@@ -11,7 +11,7 @@ var L07_Datenbank;
         port = 5001;
     let databaseUrl = "mongodb+srv://Testuser:halloichhabekeinelustmehr@eia2-e3syb.mongodb.net/Haushaltshilfe?retryWrites=true&w=majority";
     //let destination: string = "";
-    startServer(port);
+    startServer(port /*destination*/);
     connectToDatabase(databaseUrl);
     function startServer(_port /*, _destination: string*/) {
         let server = Http.createServer();

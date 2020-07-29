@@ -8,8 +8,6 @@ var L10_Virus_Inheritance;
                 this.position = _position;
             else
                 this.position = new L10_Virus_Inheritance.Vector(0, 0);
-            this.velocity = new L10_Virus_Inheritance.Vector(0, 0);
-            this.velocity = new L10_Virus_Inheritance.Vector(0, 0);
             //console.log(this.velocity);
         }
         move(_timeslice) {

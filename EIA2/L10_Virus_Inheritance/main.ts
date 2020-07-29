@@ -33,7 +33,8 @@ namespace L10_Virus_Inheritance {
     function createAntibodys (_nAntibody: number): void {
         console.log("Create Virus");
         for (let i: number = 0; i < _nAntibody; i++) {
-            let antibody: Antibody = new Antibody(1);
+            let position: Vector = new Vector(50, 100);
+            let antibody: Antibody = new Antibody(1, position);
             moveables.push(antibody);
         }
     }

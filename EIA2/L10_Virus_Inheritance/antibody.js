@@ -5,10 +5,6 @@ var L10_Virus_Inheritance;
         constructor(_size, _position) {
             super(_position);
             console.log("Virus Construtor");
-            if (_position)
-                this.position = _position;
-            else
-                this.position = new L10_Virus_Inheritance.Vector(0, 0);
             this.velocity = new L10_Virus_Inheritance.Vector(0, 0);
             this.velocity.random(80, 180);
             console.log(this.velocity);

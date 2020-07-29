@@ -1,8 +1,5 @@
 namespace L10_Virus_Inheritance {
     export class Antibody extends Moveable {
-        position: Vector;
-        velocity: Vector;
-        type: number;
         size: number;
 
         constructor (_size: number, _position?: Vector) {
@@ -10,11 +7,6 @@ namespace L10_Virus_Inheritance {
             super(_position);
 
             console.log("Virus Construtor");
-
-            if (_position)
-                this.position = _position;
-            else
-                this.position = new Vector(0, 0);
 
             this.velocity = new Vector(0, 0);
             this.velocity.random(80, 180);

@@ -2,8 +2,6 @@ namespace L10_Virus_Inheritance {
     export class Moveable {
         position: Vector;
         velocity: Vector;
-        type: number;
-        size: number;
 
         constructor (_position?: Vector) {
             console.log("Moveable Construtor");
@@ -12,8 +10,6 @@ namespace L10_Virus_Inheritance {
             else
                 this.position = new Vector(0, 0);
                 
-            this.velocity = new Vector(0, 0);
-            this.velocity = new Vector(0, 0);
             //console.log(this.velocity);
         }
 
