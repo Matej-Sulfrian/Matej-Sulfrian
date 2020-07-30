@@ -18,8 +18,8 @@
 <div id="canvasopt">
     <span id="size">
         <label>size</label>
-        <input type="number" min="100" max="800" id="sizex">
-        <p class="mal">x</p><input type="number" min="100" max="800" id="sizey">
+        <input type="number" min="100" max="1200" step="50" id="sizex">
+        <p class="mal">x</p><input type="number" min="100" max="800" step="50" id="sizey">
     </span>
     <span id="background">
         <label>background</label>
@@ -54,7 +54,7 @@
         </span>
         <span id="colorsection">
             <p>Color:</p>
-            <select name="background" id="color">
+            <select name="color" id="color">
                 <option value="black">black</option>
                 <option value="silver">silver</option>
                 <option value="gray">gray</option>
@@ -103,8 +103,8 @@
         <ul>
         
         </ul>
-        <button>save</button>
-        <button>restor</button>
+        <button id="save">save</button>
+        <button id="restor">restor</button>
     </div>
 </div>
 <body>

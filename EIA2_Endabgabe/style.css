@@ -18,11 +18,6 @@ button {
     font-size: 12pt;
 }
 
-button:hover {
-    font-size: 12pt;
-    color: blue;
-}
-
 #c {
     font-size: 42px;
     text-align: center;
@@ -85,7 +80,7 @@ button:hover {
     display: inline-block;
 }
 
-#circle, #triangle, #square {
+#triangle {
     width: 50px;
     height: 50px;
     background-color: lightgray;
@@ -93,7 +88,23 @@ button:hover {
     box-shadow: 3px 3px rgba(0, 0, 0, 0.365);
 }
 
-#circle:hover, #triangle:hover, #square:hover {
+#circle:hover {
+    width: 50px;
+    height: 50px;
+    background-color: lightblue;
+    border-radius: 5px;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.365);
+}
+
+#triangle:hover {
+    width: 50px;
+    height: 50px;
+    background-color: lightblue;
+    border-radius: 5px;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.365);
+}
+
+#square:hover {
     width: 50px;
     height: 50px;
     background-color: lightblue;
@@ -104,6 +115,11 @@ button:hover {
 #circle {
     float: left;
     margin-right: 4px;
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+    border-radius: 5px;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.365);
 }
 
 #triangle, #square {
@@ -113,6 +129,11 @@ button:hover {
 #square {
     position: relative;
     top: -19px;
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+    border-radius: 5px;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.365);
 }
 
 #t {
