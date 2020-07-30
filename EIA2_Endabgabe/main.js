@@ -50,10 +50,25 @@ var Picture;
         c?.addEventListener("change", changeColor);
         sizex?.addEventListener("change", adjustCanvas);
         sizey?.addEventListener("change", adjustCanvas);
-        bg?.addEventListener("change", adjustCanvas);
         canvasTarget?.addEventListener("click", createFigure);
-        save?.addEventListener("click", savePicture);
-        restore?.addEventListener("click", restoerPicture);
+        //save?.addEventListener("click", savePicture);
+        //restore?.addEventListener("click", restoerPicture);
+        window.setInterval(update, 20);
+    }
+    function update() {
+        drawBackground();
+        for (let figure of figures) {
+            figure.rotate();
+            figure.move(1 / 50);
+            figure.draw();
+        }
+    }
+    function drawBackground() {
+        background = bg.value;
+        Picture.crc2.resetTransform();
+        Picture.crc2.fillStyle = background;
+        Picture.crc2.fillRect(0, 0, canvasTarget.width, canvasTarget.height);
+        //console.log(background);
     }
     function selectCricle() {
         let color = c?.value;
@@ -102,6 +117,27 @@ var Picture;
         background = bg?.value;
         canvasTarget?.setAttribute("width", "" + x);
         canvasTarget?.setAttribute("height", "" + y);
+    }
+    function createFigure(_event) {
+        let position = new Picture.Vector(_event.clientX - Picture.crc2.canvas.offsetLeft, _event.clientY - Picture.crc2.canvas.offsetTop);
+        let velocity = Number(v.value);
+        let rotation = Number(r.value);
+        let color = c.value;
+        let size = Number(s.value);
+        if (figure == "circle") {
+            let circle = new Picture.Circle(position, velocity, rotation, color, size);
+            figures.push(circle);
+        }
+        else if (figure == "triangle") {
+            let trinangle = new Picture.Triangle(position, velocity, rotation, color, size);
+            figures.push(trinangle);
+        }
+        else if (figure == "square") {
+            let square = new Picture.Square(position, velocity, rotation, color, size);
+            figures.push(square);
+        }
+        else
+            console.log("no figure selected");
     }
 })(Picture || (Picture = {}));
 //# sourceMappingURL=main.js.map

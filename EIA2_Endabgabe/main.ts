@@ -2,7 +2,7 @@ namespace Picture {
 
     window.addEventListener("load", handelLoad);
     export let crc2: CanvasRenderingContext2D;
-    let figures: Figuers [] = [];
+    let figures: Figure [] = [];
     let figure: string;
 
     let canvasTarget: HTMLCanvasElement;
@@ -67,11 +67,30 @@ namespace Picture {
 
         sizex?.addEventListener("change", adjustCanvas);
         sizey?.addEventListener("change", adjustCanvas);
-        bg?.addEventListener("change", adjustCanvas);
 
         canvasTarget?.addEventListener("click", createFigure);
-        save?.addEventListener("click", savePicture);
-        restore?.addEventListener("click", restoerPicture);
+        //save?.addEventListener("click", savePicture);
+        //restore?.addEventListener("click", restoerPicture);
+
+        window.setInterval(update, 20);
+
+    }
+
+    function update(): void {
+        drawBackground();
+        for (let figure of figures) {
+            figure.rotate();
+            figure.move(1 / 50);
+            figure.draw();
+        }
+    }
+
+    function drawBackground(): void {
+        background = bg.value;
+        crc2.resetTransform();
+        crc2.fillStyle = background;
+        crc2.fillRect(0, 0, canvasTarget.width, canvasTarget.height);
+        //console.log(background);
     }
 
     function selectCricle (): void {
@@ -137,5 +156,27 @@ namespace Picture {
 
         canvasTarget?.setAttribute("width", "" + x);
         canvasTarget?.setAttribute("height", "" + y);
+    }
+
+    function createFigure(_event: MouseEvent): void {
+        let position: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
+        let velocity: number = Number(v.value);
+        let rotation: number = Number(r.value);
+        let color: string = c.value;
+        let size: number = Number(s.value);
+        if (figure == "circle") {
+            let circle: Figure = new Circle(position, velocity, rotation, color, size);
+            figures.push(circle);
+            }
+            else if (figure == "triangle") {
+                let trinangle: Figure = new Triangle(position, velocity, rotation, color, size);
+                figures.push(trinangle);
+                }
+                else if (figure == "square") {
+                    let square: Figure = new Square(position, velocity, rotation, color, size);
+                    figures.push(square);
+                    }
+                    else
+                        console.log("no figure selected");
     }
 }
