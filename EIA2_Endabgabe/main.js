@@ -3,6 +3,7 @@ var Picture;
 (function (Picture) {
     window.addEventListener("load", handelLoad);
     let figures = [];
+    let savedPictures = [];
     let figure;
     let canvasTarget;
     let circle;
@@ -21,7 +22,8 @@ var Picture;
     let background;
     let save;
     let restore;
-    function handelLoad(_event) {
+    let url = "http://localhost:5002";
+    async function handelLoad(_event) {
         //get context
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -44,22 +46,22 @@ var Picture;
         save = document.querySelector("#save");
         restore = document.querySelector("#restore");
         //add Listeners
-        circle?.addEventListener("click", selectCricle);
-        triangle?.addEventListener("click", selectTriangle);
-        square?.addEventListener("click", selectSquare);
-        c?.addEventListener("change", changeColor);
-        sizex?.addEventListener("change", adjustCanvas);
-        sizey?.addEventListener("change", adjustCanvas);
-        canvasTarget?.addEventListener("click", createFigure);
-        //save?.addEventListener("click", savePicture);
-        //restore?.addEventListener("click", restoerPicture);
+        circle.addEventListener("click", selectCricle);
+        triangle.addEventListener("click", selectTriangle);
+        square.addEventListener("click", selectSquare);
+        c.addEventListener("change", changeColor);
+        sizex.addEventListener("change", adjustCanvas);
+        sizey.addEventListener("change", adjustCanvas);
+        canvasTarget.addEventListener("click", createFigure);
+        save.addEventListener("click", savePicture);
+        restore.addEventListener("click", restoerPicture);
         window.setInterval(update, 20);
     }
     function update() {
         drawBackground();
         for (let figure of figures) {
             figure.rotate();
-            figure.move(1 / 50);
+            figure.move(1);
             figure.draw();
         }
     }
@@ -138,6 +140,42 @@ var Picture;
         }
         else
             console.log("no figure selected");
+    }
+    async function savePicture(_event) {
+        //Daten vorbereiten
+        let date = new Date();
+        let hh = String(date.getHours()).padStart(2, "0");
+        let mimi = String(date.getMinutes()).padStart(2, "0");
+        let dd = String(date.getDate()).padStart(2, "0");
+        let mm = String(date.getMonth() + 1).padStart(2, "0");
+        let yyyy = String(date.getFullYear());
+        date = hh + ":" + mimi + "; " + dd + "/" + mm + "/" + yyyy;
+        //console.log(date);
+        let x = Number(sizex.value);
+        if (x == 0)
+            x = 580;
+        let y = Number(sizey.value);
+        if (y == 0)
+            y = 400;
+        background = bg.value;
+        let infos = new Picture.PictureSave(date, figures, x, y, background);
+        //Daten an Server schicken
+        console.log("Send Picture");
+        let pictures = JSON.stringify(infos);
+        let query = new URLSearchParams(pictures);
+        let response = await fetch(url + "?" + query.toString());
+        let responseText = await response.text();
+        alert(responseText);
+    }
+    async function restoerPicture(_event) {
+        //Anfrage senden
+        console.log("sending");
+        let response = await fetch(url + "?get");
+        let responseText = await response.text();
+        let pictureData = JSON.parse(responseText);
+        alert(pictureData);
+        savedPictures.push(pictureData);
+        console.log(savedPictures);
     }
 })(Picture || (Picture = {}));
 //# sourceMappingURL=main.js.map

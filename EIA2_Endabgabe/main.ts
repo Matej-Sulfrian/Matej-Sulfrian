@@ -3,6 +3,7 @@ namespace Picture {
     window.addEventListener("load", handelLoad);
     export let crc2: CanvasRenderingContext2D;
     let figures: Figure [] = [];
+    let savedPictures: PictureSave [] = [];
     let figure: string;
 
     let canvasTarget: HTMLCanvasElement;
@@ -29,7 +30,10 @@ namespace Picture {
     let save: HTMLButtonElement;
     let restore: HTMLButtonElement;
 
-    function handelLoad (_event: Event): void {
+    let url: string = "http://localhost:5002";
+
+    async function handelLoad (_event: Event): Promise<void> {
+
         //get context
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         if (!canvas)
@@ -59,28 +63,30 @@ namespace Picture {
         restore = <HTMLButtonElement> document.querySelector("#restore");
 
         //add Listeners
-        circle?.addEventListener("click", selectCricle);
-        triangle?.addEventListener("click", selectTriangle);
-        square?.addEventListener("click", selectSquare);
+        circle.addEventListener("click", selectCricle);
+        triangle.addEventListener("click", selectTriangle);
+        square.addEventListener("click", selectSquare);
 
-        c?.addEventListener("change", changeColor);
+        c.addEventListener("change", changeColor);
 
-        sizex?.addEventListener("change", adjustCanvas);
-        sizey?.addEventListener("change", adjustCanvas);
+        sizex.addEventListener("change", adjustCanvas);
+        sizey.addEventListener("change", adjustCanvas);
 
-        canvasTarget?.addEventListener("click", createFigure);
-        //save?.addEventListener("click", savePicture);
-        //restore?.addEventListener("click", restoerPicture);
+        canvasTarget.addEventListener("click", createFigure);
+        save.addEventListener("click", savePicture);
+        restore.addEventListener("click", restoerPicture);
 
         window.setInterval(update, 20);
 
     }
 
+
+
     function update(): void {
         drawBackground();
         for (let figure of figures) {
             figure.rotate();
-            figure.move(1 / 50);
+            figure.move(1);
             figure.draw();
         }
     }
@@ -178,5 +184,52 @@ namespace Picture {
                     }
                     else
                         console.log("no figure selected");
+    }
+
+    async function savePicture(_event: Event): Promise<void> {
+        
+        //Daten vorbereiten
+        let date: Date | string = new Date();
+        let hh: string = String(date.getHours()).padStart(2, "0");
+        let mimi: string = String(date.getMinutes()).padStart(2, "0");
+        let dd: string = String(date.getDate()).padStart(2, "0");
+        let mm: string = String(date.getMonth() + 1).padStart(2, "0");
+        let yyyy: string = String(date.getFullYear());
+        date = hh + ":" + mimi + "; " + dd + "/" + mm + "/" + yyyy;
+        //console.log(date);
+
+        let x: number = Number(sizex.value);
+        if (x == 0)
+            x = 580;
+        let y: number = Number(sizey.value);
+        if (y == 0)
+            y = 400;
+        background = bg.value;
+
+        let infos: PictureSave = new PictureSave (date, figures, x, y, background);
+        
+
+        //Daten an Server schicken
+        console.log("Send Picture");
+        let pictures: string = JSON.stringify(infos);
+        let query: URLSearchParams = new URLSearchParams(pictures);
+        let response: Response = await fetch(url + "?" + query.toString());
+        let responseText: string = await response.text();
+        alert(responseText);
+
+    }
+
+    async function restoerPicture(_event: Event): Promise<void> {
+        
+        //Anfrage senden
+        console.log("sending");
+        let response: Response = await fetch(url + "?get");
+
+        let responseText: string = await response.text();
+        let pictureData: PictureSave = JSON.parse(responseText);
+        alert(pictureData);
+        savedPictures.push(pictureData);
+        console.log(savedPictures);
+
     }
 }
