@@ -2,10 +2,12 @@
 var Picture;
 (function (Picture) {
     window.addEventListener("load", handelLoad);
-    let figures = [];
+    Picture.figures = [];
     let savedPictures = [];
     let figure;
+    let list = "";
     let canvasTarget;
+    let listPlace;
     let circle;
     let circlein;
     let triangle;
@@ -30,6 +32,7 @@ var Picture;
             return;
         Picture.crc2 = canvas.getContext("2d");
         canvasTarget = document.querySelector("canvas");
+        listPlace = document.querySelector("#pictures");
         circle = document.querySelector("#circle");
         circlein = document.querySelector("#c");
         triangle = document.querySelector("#triangle");
@@ -59,7 +62,7 @@ var Picture;
     }
     function update() {
         drawBackground();
-        for (let figure of figures) {
+        for (let figure of Picture.figures) {
             figure.rotate();
             figure.move(1);
             figure.draw();
@@ -128,15 +131,15 @@ var Picture;
         let size = Number(s.value);
         if (figure == "circle") {
             let circle = new Picture.Circle(position, velocity, rotation, color, size);
-            figures.push(circle);
+            Picture.figures.push(circle);
         }
         else if (figure == "triangle") {
             let trinangle = new Picture.Triangle(position, velocity, rotation, color, size);
-            figures.push(trinangle);
+            Picture.figures.push(trinangle);
         }
         else if (figure == "square") {
             let square = new Picture.Square(position, velocity, rotation, color, size);
-            figures.push(square);
+            Picture.figures.push(square);
         }
         else
             console.log("no figure selected");
@@ -158,7 +161,7 @@ var Picture;
         if (y == 0)
             y = 400;
         background = bg.value;
-        let infos = new Picture.PictureSave(date, figures, x, y, background);
+        let infos = new Picture.PictureSave(date, Picture.figures, x, y, background);
         //Daten an Server schicken
         console.log("Send Picture");
         let pictures = JSON.stringify(infos);
@@ -166,16 +169,44 @@ var Picture;
         let response = await fetch(url + "?" + query.toString());
         let responseText = await response.text();
         alert(responseText);
+        list = "";
     }
     async function restoerPicture(_event) {
-        //Anfrage senden
-        console.log("sending");
-        let response = await fetch(url + "?get");
-        let responseText = await response.text();
-        let pictureData = JSON.parse(responseText);
-        alert(pictureData);
-        savedPictures.push(pictureData);
-        console.log(savedPictures);
+        if (list == "") {
+            //Anfrage senden
+            savedPictures.splice(0, savedPictures.length);
+            console.log("sending");
+            let response = await fetch(url + "?get");
+            let responseText = await response.text();
+            responseText.slice(2, 40);
+            let pictureData = JSON.parse(responseText);
+            alert(pictureData);
+            savedPictures.push(pictureData);
+            console.log(savedPictures);
+            createList();
+            list = "loaded";
+        }
+    }
+    function createList() {
+        listPlace.innerHTML = "";
+        for (let index = 0; index < savedPictures.length; index++) {
+            let picture = document.createElement("p");
+            picture.setAttribute("id", "" + savedPictures[index].date);
+            picture.addEventListener("click", loadPicture);
+            picture.innerHTML = "abc" + savedPictures[index].date;
+            listPlace.appendChild(picture);
+        }
+    }
+    function loadPicture(_event) {
+        console.log("loading picture");
+        for (let index = 0; index < savedPictures.length; index++) {
+            let id = _event.target.id;
+            if (id == savedPictures[index].bg) {
+                for (let index = 0; index < savedPictures.length; index++) {
+                    Picture.figures.push(savedPictures[index].figure[index]);
+                }
+            }
+        }
     }
 })(Picture || (Picture = {}));
 //# sourceMappingURL=main.js.map

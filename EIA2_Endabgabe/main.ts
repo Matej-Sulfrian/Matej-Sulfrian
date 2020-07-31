@@ -2,11 +2,14 @@ namespace Picture {
 
     window.addEventListener("load", handelLoad);
     export let crc2: CanvasRenderingContext2D;
-    let figures: Figure [] = [];
-    let savedPictures: PictureSave [] = [];
+    export let figures: Figure[] = [];
+    let savedPictures: PictureSave[] = [];
     let figure: string;
+    let list: string = "";
 
     let canvasTarget: HTMLCanvasElement;
+
+    let listPlace: HTMLDivElement;
 
     let circle: HTMLDivElement;
     let circlein: HTMLElement;
@@ -32,35 +35,37 @@ namespace Picture {
 
     let url: string = "http://localhost:5002";
 
-    async function handelLoad (_event: Event): Promise<void> {
+    async function handelLoad(_event: Event): Promise<void> {
 
         //get context
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-        canvasTarget = <HTMLCanvasElement> document.querySelector("canvas");
+        canvasTarget = <HTMLCanvasElement>document.querySelector("canvas");
 
-        circle = <HTMLDivElement> document.querySelector("#circle");
-        circlein = <HTMLElement> document.querySelector("#c");
+        listPlace = <HTMLDivElement>document.querySelector("#pictures");
 
-        triangle = <HTMLDivElement> document.querySelector("#triangle");
-        trianglein = <HTMLElement> document.querySelector("#t");
+        circle = <HTMLDivElement>document.querySelector("#circle");
+        circlein = <HTMLElement>document.querySelector("#c");
 
-        square = <HTMLDivElement> document.querySelector("#square");
-        squarein = <HTMLElement> document.querySelector("#s");
+        triangle = <HTMLDivElement>document.querySelector("#triangle");
+        trianglein = <HTMLElement>document.querySelector("#t");
 
-        v = <HTMLSelectElement> document.querySelector("#velocity");
-        r = <HTMLSelectElement> document.querySelector("#rotation");
-        c = <HTMLSelectElement> document.querySelector("#color");
-        s = <HTMLSelectElement> document.querySelector("#figuresize");
+        square = <HTMLDivElement>document.querySelector("#square");
+        squarein = <HTMLElement>document.querySelector("#s");
 
-        sizex = <HTMLInputElement> document.querySelector("#sizex");
-        sizey = <HTMLInputElement> document.querySelector("#sizey");
-        bg = <HTMLSelectElement> document.querySelector("#backgroundc");
+        v = <HTMLSelectElement>document.querySelector("#velocity");
+        r = <HTMLSelectElement>document.querySelector("#rotation");
+        c = <HTMLSelectElement>document.querySelector("#color");
+        s = <HTMLSelectElement>document.querySelector("#figuresize");
 
-        save = <HTMLButtonElement> document.querySelector("#save");
-        restore = <HTMLButtonElement> document.querySelector("#restore");
+        sizex = <HTMLInputElement>document.querySelector("#sizex");
+        sizey = <HTMLInputElement>document.querySelector("#sizey");
+        bg = <HTMLSelectElement>document.querySelector("#backgroundc");
+
+        save = <HTMLButtonElement>document.querySelector("#save");
+        restore = <HTMLButtonElement>document.querySelector("#restore");
 
         //add Listeners
         circle.addEventListener("click", selectCricle);
@@ -99,7 +104,7 @@ namespace Picture {
         //console.log(background);
     }
 
-    function selectCricle (): void {
+    function selectCricle(): void {
         let color: string = c?.value;
         figure = "circle";
 
@@ -113,7 +118,7 @@ namespace Picture {
         squarein?.setAttribute("style", "color: black");
     }
 
-    function selectTriangle (): void {
+    function selectTriangle(): void {
         let color: string = c?.value;
         figure = "triangle";
 
@@ -127,7 +132,7 @@ namespace Picture {
         squarein?.setAttribute("style", "color: black");
     }
 
-    function selectSquare (): void {
+    function selectSquare(): void {
         let color: string = c?.value;
         figure = "square";
 
@@ -146,12 +151,12 @@ namespace Picture {
 
         if (figure == "circle")
             circlein?.setAttribute("style", "color: " + color);
-            else if (figure == "triangle")
-                trianglein?.setAttribute("style", "color: " + color);
-                else if (figure == "square")
-                    squarein?.setAttribute("style", "color: " + color);
-                        else
-                            console.log("no figure selectetd");
+        else if (figure == "triangle")
+            trianglein?.setAttribute("style", "color: " + color);
+        else if (figure == "square")
+            squarein?.setAttribute("style", "color: " + color);
+        else
+            console.log("no figure selectetd");
     }
 
     function adjustCanvas(): void {
@@ -173,21 +178,21 @@ namespace Picture {
         if (figure == "circle") {
             let circle: Figure = new Circle(position, velocity, rotation, color, size);
             figures.push(circle);
-            }
-            else if (figure == "triangle") {
-                let trinangle: Figure = new Triangle(position, velocity, rotation, color, size);
-                figures.push(trinangle);
-                }
-                else if (figure == "square") {
-                    let square: Figure = new Square(position, velocity, rotation, color, size);
-                    figures.push(square);
-                    }
-                    else
-                        console.log("no figure selected");
+        }
+        else if (figure == "triangle") {
+            let trinangle: Figure = new Triangle(position, velocity, rotation, color, size);
+            figures.push(trinangle);
+        }
+        else if (figure == "square") {
+            let square: Figure = new Square(position, velocity, rotation, color, size);
+            figures.push(square);
+        }
+        else
+            console.log("no figure selected");
     }
 
     async function savePicture(_event: Event): Promise<void> {
-        
+
         //Daten vorbereiten
         let date: Date | string = new Date();
         let hh: string = String(date.getHours()).padStart(2, "0");
@@ -206,8 +211,8 @@ namespace Picture {
             y = 400;
         background = bg.value;
 
-        let infos: PictureSave = new PictureSave (date, figures, x, y, background);
-        
+        let infos: PictureSave = new PictureSave(date, figures, x, y, background);
+
 
         //Daten an Server schicken
         console.log("Send Picture");
@@ -216,20 +221,52 @@ namespace Picture {
         let response: Response = await fetch(url + "?" + query.toString());
         let responseText: string = await response.text();
         alert(responseText);
+        
+        list = "";
 
     }
 
     async function restoerPicture(_event: Event): Promise<void> {
-        
-        //Anfrage senden
-        console.log("sending");
-        let response: Response = await fetch(url + "?get");
+        if (list == "") {
+            //Anfrage senden
+            savedPictures.splice(0, savedPictures.length);
+            console.log("sending");
+            let response: Response = await fetch(url + "?get");
 
-        let responseText: string = await response.text();
-        let pictureData: PictureSave = JSON.parse(responseText);
-        alert(pictureData);
-        savedPictures.push(pictureData);
-        console.log(savedPictures);
+            let responseText: string = await response.text();
+            responseText.slice(2, 40);
+            let pictureData: PictureSave = JSON.parse(responseText);
+            alert(pictureData);
+            savedPictures.push(pictureData);
+            console.log(savedPictures);
+            createList();
+            list = "loaded";
 
+        }
     }
+
+    function createList(): void {
+        listPlace.innerHTML = "";
+        for (let index: number = 0; index < savedPictures.length; index++) {
+            let picture: HTMLParagraphElement = document.createElement("p");
+            picture.setAttribute("id", "" + savedPictures[index].date);
+            picture.addEventListener("click", loadPicture);
+            picture.innerHTML = "abc" + savedPictures[index].date;
+            listPlace.appendChild(picture);
+        }
+    }
+
+    function loadPicture(_event: Event): void {
+        console.log("loading picture");
+        for (let index: number = 0; index < savedPictures.length; index++) {
+            let id: string = (_event.target as Element).id;
+            if (id == savedPictures[index].bg) {
+                for (let index: number = 0; index < savedPictures.length; index++) {
+                    figures.push(savedPictures[index].figure[index]);
+                }
+            }
+        }
+    }
+
+
 }
