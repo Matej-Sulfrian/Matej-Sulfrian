@@ -26,7 +26,7 @@ var Picture;
     let restore;
     let clear;
     let del;
-    let url = "http://localhost:5002";
+    let url = "https://paintityourown.herokuapp.com/";
     async function handelLoad(_event) {
         //get context
         let canvas = document.querySelector("canvas");

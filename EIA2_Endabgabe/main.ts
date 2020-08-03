@@ -36,7 +36,7 @@ namespace Picture {
     let clear: HTMLButtonElement;
     let del: HTMLButtonElement;
 
-    let url: string = "http://localhost:5002";
+    let url: string = "https://paintityourown.herokuapp.com/";
 
     async function handelLoad(_event: Event): Promise<void> {
 

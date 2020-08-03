@@ -1,5 +1,5 @@
 {
-  "name": "matej-sulfrian",
+  "name": "paintityourown",
   "version": "1.0.0",
   "description": "dnbrules",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node EIA2/L07_Datenbank/server.js"
+    "start": "node EIA2_Endabgabe/server.js"
   },
   "repository": {
     "type": "git",
