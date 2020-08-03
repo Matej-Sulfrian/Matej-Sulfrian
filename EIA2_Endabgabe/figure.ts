@@ -4,21 +4,28 @@ namespace Picture {
         velocity: Vector;
         rotation: number;
         factor: number;
+        type: string;
+        color: string;
+        size: number;
 
-        constructor (_position: Vector, _parameter: number, _rotation: number) {
+        constructor (_type: string, _position: Vector, _velocity: Vector, _rotation: number, _color: string, _size: number) {
             this.position = _position;
             this.rotation = _rotation;
+            this.type = _type;
+            this.color = _color;
+            this.size = _size;
             this.velocity = new Vector (0, 0);
             this.factor = this.rotation;
+            this.velocity = _velocity;
 
-            if (_parameter == 1)
+            if (this.velocity.x == 1)
                 this.velocity.random(1, 1);
-                else if (_parameter == 2)
+                else if (this.velocity.x == 2)
                     this.velocity.random(2, 2);
-                    else if (_parameter)
+                    else if (this.velocity.x)
                         this.velocity.random(3, 3);
                         else
-                            console.log("no velocity");  
+                            console.log("no velocity");
         }
 
         move(_timeslice: number): void {
@@ -34,6 +41,9 @@ namespace Picture {
                 this.position.x -= crc2.canvas.width;
             if (this.position.y > crc2.canvas.height)
                 this.position.y -= crc2.canvas.height;
+            
+            console.log(this.position);
+            console.log(this.velocity);
         }
         
         rotate(): void {

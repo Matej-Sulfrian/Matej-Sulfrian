@@ -2,10 +2,8 @@
 var Picture;
 (function (Picture) {
     class Triangle extends Picture.Figure {
-        constructor(_position, _parameter, _rotation, _color, _size) {
-            super(_position, _parameter, _rotation);
-            this.color = _color;
-            this.size = _size;
+        constructor(_type, _position, _velocity, _rotation, _color, _size) {
+            super(_type, _position, _velocity, _rotation, _color, _size);
         }
         draw() {
             if (this.rotation == 0)

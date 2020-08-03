@@ -11,5 +11,11 @@ var Picture;
         }
     }
     Picture.PictureSave = PictureSave;
+    class MongoDBPictureEntry {
+        constructor(_data) {
+            this.data = _data;
+        }
+    }
+    Picture.MongoDBPictureEntry = MongoDBPictureEntry;
 })(Picture || (Picture = {}));
 //# sourceMappingURL=pictureSave.js.map

@@ -24,6 +24,8 @@ var Picture;
     let background;
     let save;
     let restore;
+    let clear;
+    let del;
     let url = "http://localhost:5002";
     async function handelLoad(_event) {
         //get context
@@ -48,6 +50,8 @@ var Picture;
         bg = document.querySelector("#backgroundc");
         save = document.querySelector("#save");
         restore = document.querySelector("#restore");
+        clear = document.querySelector("#clear");
+        del = document.querySelector("#delete");
         //add Listeners
         circle.addEventListener("click", selectCricle);
         triangle.addEventListener("click", selectTriangle);
@@ -58,6 +62,8 @@ var Picture;
         canvasTarget.addEventListener("click", createFigure);
         save.addEventListener("click", savePicture);
         restore.addEventListener("click", restoerPicture);
+        clear.addEventListener("click", clearCanvas);
+        del.addEventListener("click", delCanvas);
         window.setInterval(update, 20);
     }
     function update() {
@@ -67,6 +73,12 @@ var Picture;
             figure.move(1);
             figure.draw();
         }
+    }
+    function clearCanvas() {
+        Picture.figures.pop();
+    }
+    function delCanvas() {
+        Picture.figures = [];
     }
     function drawBackground() {
         background = bg.value;
@@ -120,25 +132,27 @@ var Picture;
         let x = sizex?.value;
         let y = sizey?.value;
         background = bg?.value;
-        canvasTarget?.setAttribute("width", "" + x);
-        canvasTarget?.setAttribute("height", "" + y);
+        canvasTarget.setAttribute("width", "" + x);
+        canvasTarget.setAttribute("height", "" + y);
     }
     function createFigure(_event) {
         let position = new Picture.Vector(_event.clientX - Picture.crc2.canvas.offsetLeft, _event.clientY - Picture.crc2.canvas.offsetTop);
-        let velocity = Number(v.value);
+        let velocity;
+        let parameter = Number(v.value);
         let rotation = Number(r.value);
         let color = c.value;
         let size = Number(s.value);
+        velocity = new Picture.Vector(parameter, parameter);
         if (figure == "circle") {
-            let circle = new Picture.Circle(position, velocity, rotation, color, size);
+            let circle = new Picture.Circle(figure, position, velocity, rotation, color, size);
             Picture.figures.push(circle);
         }
         else if (figure == "triangle") {
-            let trinangle = new Picture.Triangle(position, velocity, rotation, color, size);
+            let trinangle = new Picture.Triangle(figure, position, velocity, rotation, color, size);
             Picture.figures.push(trinangle);
         }
         else if (figure == "square") {
-            let square = new Picture.Square(position, velocity, rotation, color, size);
+            let square = new Picture.Square(figure, position, velocity, rotation, color, size);
             Picture.figures.push(square);
         }
         else
@@ -152,7 +166,7 @@ var Picture;
         let dd = String(date.getDate()).padStart(2, "0");
         let mm = String(date.getMonth() + 1).padStart(2, "0");
         let yyyy = String(date.getFullYear());
-        date = hh + ":" + mimi + "; " + dd + "/" + mm + "/" + yyyy;
+        date = hh + ":" + mimi + " Uhr - " + dd + "/" + mm + "/" + yyyy;
         //console.log(date);
         let x = Number(sizex.value);
         if (x == 0)
@@ -162,13 +176,17 @@ var Picture;
             y = 400;
         background = bg.value;
         let infos = new Picture.PictureSave(date, Picture.figures, x, y, background);
+        // let dbEntry: MongoDBPictureEntry = new MongoDBPictureEntry(infos);
         //Daten an Server schicken
         console.log("Send Picture");
         let pictures = JSON.stringify(infos);
         let query = new URLSearchParams(pictures);
         let response = await fetch(url + "?" + query.toString());
         let responseText = await response.text();
-        alert(responseText);
+        if (responseText)
+            alert(responseText);
+        else
+            alert("There is no picture to safe");
         list = "";
     }
     async function restoerPicture(_event) {
@@ -179,9 +197,15 @@ var Picture;
             let response = await fetch(url + "?get");
             let responseText = await response.text();
             responseText.slice(2, 40);
-            let pictureData = JSON.parse(responseText);
-            alert(pictureData);
-            savedPictures.push(pictureData);
+            let dbData = JSON.parse(responseText);
+            for (let index = 0; index < dbData.length; index++) {
+                if (index % 2 == 1) {
+                    console.log(dbData[index]);
+                    let pictureData = JSON.parse(dbData[index]);
+                    savedPictures.push(pictureData);
+                }
+            }
+            //alert(savedPictures);
             console.log(savedPictures);
             createList();
             list = "loaded";
@@ -193,17 +217,43 @@ var Picture;
             let picture = document.createElement("p");
             picture.setAttribute("id", "" + savedPictures[index].date);
             picture.addEventListener("click", loadPicture);
-            picture.innerHTML = "abc" + savedPictures[index].date;
+            picture.innerHTML = savedPictures[index].date;
             listPlace.appendChild(picture);
+            console.log(savedPictures[index].date);
         }
     }
     function loadPicture(_event) {
         console.log("loading picture");
+        Picture.figures = [];
         for (let index = 0; index < savedPictures.length; index++) {
             let id = _event.target.id;
-            if (id == savedPictures[index].bg) {
-                for (let index = 0; index < savedPictures.length; index++) {
-                    Picture.figures.push(savedPictures[index].figure[index]);
+            if (id == savedPictures[index].date) {
+                background = savedPictures[index].bg;
+                let x = savedPictures[index].sizex;
+                let y = savedPictures[index].sizey;
+                canvasTarget.setAttribute("width", "" + x);
+                canvasTarget.setAttribute("height", "" + y);
+                for (let i = 0; i < savedPictures[index].figure.length; i++) {
+                    let tempType = savedPictures[index].figure[i].type;
+                    let tempPosition = new Picture.Vector(savedPictures[index].figure[i].position.x, savedPictures[index].figure[i].position.y);
+                    let tempVelocity = new Picture.Vector(savedPictures[index].figure[i].velocity.x, savedPictures[index].figure[i].velocity.y);
+                    let tempRotation = savedPictures[index].figure[i].rotation;
+                    let tempColor = savedPictures[index].figure[i].color;
+                    let tempSize = savedPictures[index].figure[i].size;
+                    if (savedPictures[index].figure[i].type == "circle") {
+                        let circle = new Picture.Circle(tempType, tempPosition, tempVelocity, tempRotation, tempColor, tempSize);
+                        Picture.figures.push(circle);
+                    }
+                    else if (savedPictures[index].figure[i].type == "triangle") {
+                        let trinangle = new Picture.Triangle(figure, tempPosition, tempVelocity, tempRotation, tempColor, tempSize);
+                        Picture.figures.push(trinangle);
+                    }
+                    else if (savedPictures[index].figure[i].type == "square") {
+                        let square = new Picture.Square(figure, tempPosition, tempVelocity, tempRotation, tempColor, tempSize);
+                        Picture.figures.push(square);
+                    }
+                    else
+                        console.log("no figure selected");
                 }
             }
         }

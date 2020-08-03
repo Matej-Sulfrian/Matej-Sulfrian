@@ -33,6 +33,9 @@ namespace Picture {
     let save: HTMLButtonElement;
     let restore: HTMLButtonElement;
 
+    let clear: HTMLButtonElement;
+    let del: HTMLButtonElement;
+
     let url: string = "http://localhost:5002";
 
     async function handelLoad(_event: Event): Promise<void> {
@@ -67,6 +70,9 @@ namespace Picture {
         save = <HTMLButtonElement>document.querySelector("#save");
         restore = <HTMLButtonElement>document.querySelector("#restore");
 
+        clear = <HTMLButtonElement>document.querySelector("#clear");
+        del = <HTMLButtonElement>document.querySelector("#delete");
+
         //add Listeners
         circle.addEventListener("click", selectCricle);
         triangle.addEventListener("click", selectTriangle);
@@ -80,6 +86,8 @@ namespace Picture {
         canvasTarget.addEventListener("click", createFigure);
         save.addEventListener("click", savePicture);
         restore.addEventListener("click", restoerPicture);
+        clear.addEventListener("click", clearCanvas);
+        del.addEventListener("click", delCanvas);
 
         window.setInterval(update, 20);
 
@@ -90,10 +98,19 @@ namespace Picture {
     function update(): void {
         drawBackground();
         for (let figure of figures) {
+
             figure.rotate();
             figure.move(1);
             figure.draw();
         }
+    }
+
+    function clearCanvas(): void {
+        figures.pop();
+    }
+
+    function delCanvas(): void {
+        figures = [];
     }
 
     function drawBackground(): void {
@@ -165,26 +182,30 @@ namespace Picture {
 
         background = bg?.value;
 
-        canvasTarget?.setAttribute("width", "" + x);
-        canvasTarget?.setAttribute("height", "" + y);
+        canvasTarget.setAttribute("width", "" + x);
+        canvasTarget.setAttribute("height", "" + y);
     }
 
     function createFigure(_event: MouseEvent): void {
         let position: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
-        let velocity: number = Number(v.value);
+        let velocity: Vector;
+        let parameter: number = Number(v.value);
         let rotation: number = Number(r.value);
         let color: string = c.value;
         let size: number = Number(s.value);
+
+        velocity = new Vector(parameter, parameter);
+
         if (figure == "circle") {
-            let circle: Figure = new Circle(position, velocity, rotation, color, size);
+            let circle: Figure = new Circle(figure, position, velocity, rotation, color, size);
             figures.push(circle);
         }
         else if (figure == "triangle") {
-            let trinangle: Figure = new Triangle(position, velocity, rotation, color, size);
+            let trinangle: Figure = new Triangle(figure, position, velocity, rotation, color, size);
             figures.push(trinangle);
         }
         else if (figure == "square") {
-            let square: Figure = new Square(position, velocity, rotation, color, size);
+            let square: Figure = new Square(figure, position, velocity, rotation, color, size);
             figures.push(square);
         }
         else
@@ -200,7 +221,7 @@ namespace Picture {
         let dd: string = String(date.getDate()).padStart(2, "0");
         let mm: string = String(date.getMonth() + 1).padStart(2, "0");
         let yyyy: string = String(date.getFullYear());
-        date = hh + ":" + mimi + "; " + dd + "/" + mm + "/" + yyyy;
+        date = hh + ":" + mimi + " Uhr - " + dd + "/" + mm + "/" + yyyy;
         //console.log(date);
 
         let x: number = Number(sizex.value);
@@ -212,6 +233,7 @@ namespace Picture {
         background = bg.value;
 
         let infos: PictureSave = new PictureSave(date, figures, x, y, background);
+        // let dbEntry: MongoDBPictureEntry = new MongoDBPictureEntry(infos);
 
 
         //Daten an Server schicken
@@ -220,7 +242,10 @@ namespace Picture {
         let query: URLSearchParams = new URLSearchParams(pictures);
         let response: Response = await fetch(url + "?" + query.toString());
         let responseText: string = await response.text();
-        alert(responseText);
+        if (responseText)
+            alert(responseText);
+            else
+                alert("There is no picture to safe");
         
         list = "";
 
@@ -235,9 +260,17 @@ namespace Picture {
 
             let responseText: string = await response.text();
             responseText.slice(2, 40);
-            let pictureData: PictureSave = JSON.parse(responseText);
-            alert(pictureData);
-            savedPictures.push(pictureData);
+            
+            let dbData: string [] = JSON.parse(responseText);
+            for (let index: number = 0; index < dbData.length; index++) {
+                if (index % 2 == 1) {
+                    console.log(dbData[index]);
+                    let pictureData: PictureSave = JSON.parse(dbData[index]);
+                    savedPictures.push(pictureData);
+                }
+            }
+
+            //alert(savedPictures);
             console.log(savedPictures);
             createList();
             list = "loaded";
@@ -251,22 +284,46 @@ namespace Picture {
             let picture: HTMLParagraphElement = document.createElement("p");
             picture.setAttribute("id", "" + savedPictures[index].date);
             picture.addEventListener("click", loadPicture);
-            picture.innerHTML = "abc" + savedPictures[index].date;
+            picture.innerHTML = savedPictures[index].date;
             listPlace.appendChild(picture);
+            console.log(savedPictures[index].date);
         }
     }
 
     function loadPicture(_event: Event): void {
         console.log("loading picture");
+        figures = [];
         for (let index: number = 0; index < savedPictures.length; index++) {
             let id: string = (_event.target as Element).id;
-            if (id == savedPictures[index].bg) {
-                for (let index: number = 0; index < savedPictures.length; index++) {
-                    figures.push(savedPictures[index].figure[index]);
+            if (id == savedPictures[index].date) {
+                background = savedPictures[index].bg;
+                let x: number = savedPictures[index].sizex;
+                let y: number = savedPictures[index].sizey;
+                canvasTarget.setAttribute("width", "" + x);
+                canvasTarget.setAttribute("height", "" + y);
+                for (let i: number = 0; i < savedPictures[index].figure.length; i++) {
+                    let tempType: string = savedPictures[index].figure[i].type;
+                    let tempPosition: Vector = new Vector(savedPictures[index].figure[i].position.x, savedPictures[index].figure[i].position.y);
+                    let tempVelocity: Vector = new Vector(savedPictures[index].figure[i].velocity.x, savedPictures[index].figure[i].velocity.y);
+                    let tempRotation: number = savedPictures[index].figure[i].rotation;
+                    let tempColor: string = savedPictures[index].figure[i].color;
+                    let tempSize: number = savedPictures[index].figure[i].size;
+                    if (savedPictures[index].figure[i].type == "circle") {
+                        let circle: Figure = new Circle(tempType, tempPosition, tempVelocity, tempRotation, tempColor, tempSize);
+                        figures.push(circle);
+                    }
+                    else if (savedPictures[index].figure[i].type == "triangle") {
+                        let trinangle: Figure = new Triangle(figure, tempPosition, tempVelocity, tempRotation, tempColor, tempSize);
+                        figures.push(trinangle);
+                    }
+                    else if (savedPictures[index].figure[i].type == "square") {
+                        let square: Figure = new Square(figure, tempPosition, tempVelocity, tempRotation, tempColor, tempSize);
+                        figures.push(square);
+                    }
+                    else
+                        console.log("no figure selected");
                 }
             }
         }
     }
-
-
 }

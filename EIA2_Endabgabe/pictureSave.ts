@@ -13,5 +13,15 @@ namespace Picture {
             this.sizey = _sizey;
             this.bg = _bg;
         }
-    } 
+    }
+    
+    export class MongoDBPictureEntry {
+        
+        data: PictureSave;
+
+        constructor(_data: PictureSave) {
+            this.data = _data;
+        }
+
+    }
 }

@@ -22,7 +22,7 @@ namespace Picture {
             this.y += Number(_addend.y.toFixed());
         }
 
-        random(_minLength: number, _maxLength: number): void {
+        random(_minLength: number, _maxLength: number): any {
             let length: number = _minLength + Math.random() * (_maxLength - _minLength);
             let direction: number = Math.random() * 2 * Math.PI;
 

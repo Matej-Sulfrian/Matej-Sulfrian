@@ -165,3 +165,17 @@ button {
    width: 300px;
    text-align: right;
 }
+
+#pictures {
+    overflow: scroll;
+    height: 300px;
+    border-style: none;
+}
+
+#del {
+    width: 600px;
+    height: 80px;
+    white-space: nowrap;
+    overflow-x: auto;
+    clear: both;
+}

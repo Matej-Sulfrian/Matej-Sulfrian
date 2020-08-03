@@ -39,6 +39,7 @@ var Picture;
             if (_request.url.indexOf("factor") != -1) {
                 _response.write("Pictured saved. Thank you for painting.");
                 storeOrder(url.query);
+                console.log(url.query);
             }
             if (_request.url.indexOf("get") != -1) {
                 let cursor = await pictures.find();

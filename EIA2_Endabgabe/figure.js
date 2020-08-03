@@ -2,16 +2,20 @@
 var Picture;
 (function (Picture) {
     class Figure {
-        constructor(_position, _parameter, _rotation) {
+        constructor(_type, _position, _velocity, _rotation, _color, _size) {
             this.position = _position;
             this.rotation = _rotation;
+            this.type = _type;
+            this.color = _color;
+            this.size = _size;
             this.velocity = new Picture.Vector(0, 0);
             this.factor = this.rotation;
-            if (_parameter == 1)
+            this.velocity = _velocity;
+            if (this.velocity.x == 1)
                 this.velocity.random(1, 1);
-            else if (_parameter == 2)
+            else if (this.velocity.x == 2)
                 this.velocity.random(2, 2);
-            else if (_parameter)
+            else if (this.velocity.x)
                 this.velocity.random(3, 3);
             else
                 console.log("no velocity");
@@ -28,6 +32,8 @@ var Picture;
                 this.position.x -= Picture.crc2.canvas.width;
             if (this.position.y > Picture.crc2.canvas.height)
                 this.position.y -= Picture.crc2.canvas.height;
+            console.log(this.position);
+            console.log(this.velocity);
         }
         rotate() {
             if (this.rotation != 0) {
